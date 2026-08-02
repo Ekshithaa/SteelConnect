@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SteelConnect{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-page">
+    <header class="site-header app-header">
+        <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">⬡</span><span><strong>Steel<span>Connect</span></strong><small>Smart Inventory &amp; Support</small></span></a>
+        <nav class="main-nav"><a href="{{ url_for('home') }}">⌂ <span>Home</span></a><a href="{{ url_for('products_catalog') }}">◈ <span>Products</span></a><a href="{{ url_for('track_order') }}">▤ <span>Track Order</span></a>{% if session.get('user_id') %}<a href="{{ url_for('my_orders') }}">▣ <span>My Orders</span></a><a href="{{ url_for('complaints') }}">◉ <span>Support</span></a>{% endif %}{% if session.get('is_admin') %}<a href="{{ url_for('admin') }}">♙ <span>Admin</span></a>{% endif %}</nav>
+        <div class="account-actions">
+            {% if session.get('user_id') %}
+                <span class="welcome">Hi, {{ session.get('user_name') }}</span>
+                <form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="nav-login" type="submit">Log out</button></form>
+            {% else %}
+                <a class="nav-login" href="{{ url_for('login') }}">Log in</a><a class="nav-register" href="{{ url_for('register') }}">Create account</a>
+            {% endif %}
+        </div>
+    </header>
+    <main class="app-main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

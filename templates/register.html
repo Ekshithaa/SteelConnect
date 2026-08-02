@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Create account | SteelConnect{% endblock %}
+{% block content %}
+<section class="auth-layout"><div class="auth-card wide"><p class="eyebrow">Get started</p><h1>Create your SteelConnect account</h1><p>Create a customer account to place orders, track them, and manage support tickets.</p><form method="post" class="form-grid two-columns"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>Full name<input type="text" name="fullname" autocomplete="name" required></label><label>Phone number<input type="tel" name="phone" autocomplete="tel" required></label><label class="full">Email address<input type="email" name="email" autocomplete="email" required></label><label>Password<input type="password" name="password" minlength="8" autocomplete="new-password" required></label><label>Confirm password<input type="password" name="confirm_password" minlength="8" autocomplete="new-password" required></label><button class="primary-action full" type="submit">Create account</button></form><p class="form-note">Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p></div></section>
+{% endblock %}

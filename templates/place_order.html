@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Place order | SteelConnect{% endblock %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">Order portal</p><h1>Place a steel order</h1><p>Availability is checked before every order and stock is updated immediately.</p></section>
+<section class="content-card order-card"><form method="post" class="form-grid two-columns"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>Customer or company name<input type="text" name="customer" value="{{ session.get('user_name', '') }}" required></label><label>Phone number<input type="tel" name="phone" value="{{ session.get('user_phone', '') }}" required></label><label class="full">Choose product<select name="product_id" required><option value="">Select available stock</option>{% for product in products %}<option value="{{ product.id }}"{% if selected_product_id == product.id %} selected{% endif %}>{{ product.name }} — {{ product.stock }} tons available · ₹{{ '{:,}'.format(product.price) }}/ton</option>{% endfor %}</select></label><label class="full">Quantity (tons)<input type="number" name="quantity" min="1" step="1" required></label><button class="primary-action full" type="submit">Confirm order</button></form></section>
+{% endblock %}

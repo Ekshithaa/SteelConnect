@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Order confirmed | SteelConnect{% endblock %}
+{% block content %}
+<section class="auth-layout"><div class="auth-card success-card"><div class="success-symbol">✓</div><p class="eyebrow">Order confirmed</p><h1>Your order is being processed</h1><p>Keep this order ID safe. You can use it at any time to check progress.</p><div class="order-id">{{ order_id }}</div><div class="inline-actions"><a class="primary-action" href="{{ url_for('track_order') }}">Track order</a><a class="secondary-action" href="{{ url_for('home') }}">Back home</a></div></div></section>
+{% endblock %}

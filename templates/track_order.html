@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Track order | SteelConnect{% endblock %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">Order tracking</p><h1>Know where your order is</h1><p>Enter the order ID shown after you placed your order.</p></section>
+<section class="content-card tracker"><form method="post" class="track-form"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="text" name="order_id" placeholder="Example: ORD-20260712-ABC123" required><button class="primary-action" type="submit">Track order</button></form>{% if order %}<article class="tracking-result"><div><span>Order ID</span><strong>{{ order.order_id }}</strong></div><div><span>Product</span><strong>{{ order.product }} · {{ order.quantity }} tons</strong></div><div><span>Placed</span><strong>{{ order.created_at or 'Earlier order' }}</strong></div><div><span>Current status</span><strong class="status {{ order.status|lower }}">{{ order.status }}</strong></div></article>{% endif %}</section>
+{% endblock %}

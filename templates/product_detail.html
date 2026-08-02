@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | SteelConnect{% endblock %}
+{% block content %}
+<section class="product-detail"><a class="back-link" href="{{ url_for('products_catalog') }}">← Back to all products</a><div class="product-detail-layout"><img src="{{ product_image(product) }}" alt="{{ product.name }}"><div><p class="eyebrow">{{ product.category }}</p><h1>{{ product.name }}</h1><p class="detail-description">{{ product.description or 'Premium-grade steel product.' }}</p><span class="detail-stock {{ 'available' if product.stock > 50 else 'low' if product.stock > 0 else 'sold-out' }}">{{ product.stock }} tons {{ 'available now' if product.stock > 0 else 'currently unavailable' }}</span><div class="detail-price">₹{{ '{:,}'.format(product.price) }} <small>per ton</small></div>{% if product.stock > 0 %}<a class="primary-action" href="{{ url_for('place_order', product_id=product.id) }}">Place an order</a>{% else %}<a class="secondary-action" href="{{ url_for('complaints') if session.get('user_id') else url_for('login') }}">Ask about availability</a>{% endif %}</div></div></section>
+{% endblock %}

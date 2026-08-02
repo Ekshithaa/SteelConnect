@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteelConnect | Smart Inventory & Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home-page">
+    <header class="site-header">
+        <a class="brand" href="#home" aria-label="SteelConnect home">
+            <span class="brand-mark">⬡</span>
+            <span><strong>Steel<span>Connect</span></strong><small>Smart Inventory &amp; Support</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Primary navigation">
+            <a class="active" href="#home">⌂ <span>Home</span></a>
+            <a href="{{ url_for('products_catalog') }}">◈ <span>Products</span></a>
+            <a href="#inventory">▣ <span>Inventory</span></a>
+            <a href="{{ url_for('track_order') }}">▤ <span>Orders</span></a>
+            <a href="{{ url_for('complaints') }}">◉ <span>Complaints</span></a>
+            <a href="{{ url_for('admin') }}">♙ <span>Admin</span></a>
+        </nav>
+        <button class="bot-launch" type="button" onclick="document.querySelector('.chatbot').scrollIntoView({behavior: 'smooth'})">☃ SteelBot <i></i></button>
+    </header>
+
+    <main id="home">
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <p class="eyebrow">SteelConnect</p>
+                <h1>STEEL<span>CONNECT</span></h1>
+                <h2>Smart Inventory &amp; Customer<br>Assistance Support System</h2>
+                <p class="hero-description">Real-time inventory management, order tracking,<br>complaint handling and intelligent customer support.</p>
+                <div class="hero-actions">
+                    <a class="glow-button" href="{{ url_for('products_catalog') }}">▣ &nbsp; Explore Products</a>
+                    <a class="outline-button" href="{{ url_for('track_order') }}">▤ &nbsp; Track Orders</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="metrics" aria-label="SteelConnect statistics">
+            <article><span class="metric-icon blue">◈</span><div><strong>{{ metrics.product_count }}</strong><small>Products</small></div></article>
+            <article><span class="metric-icon green">🛒</span><div><strong>{{ metrics.order_count }}</strong><small>Orders Processed</small></div></article>
+            <article><span class="metric-icon purple">◉</span><div><strong>24/7</strong><small>Customer Support</small></div></article>
+            <article><span class="metric-icon orange">▥</span><div><strong>98%</strong><small>Satisfaction Rate</small></div></article>
+        </section>
+
+        <section class="product-section" id="products">
+            <div class="section-heading"><span></span><h2>Our Steel Products</h2><span></span></div>
+            <div class="product-grid target-grid">
+                {% for product in products %}
+                <article class="product-card target-card">
+                    <div class="product-thumb"><img src="{{ product_image(product) }}" alt="{{ product.name }}"></div><div class="product-content"><h3>{{ product.name }}</h3><p>{{ product.description or 'Premium steel supply for industrial operations.' }}</p></div>
+                    <div class="product-footer"><b class="stock {% if loop.index == 1 %}blue-text{% elif loop.index == 2 %}green-text{% else %}orange-text{% endif %}">♜ &nbsp;{{ product.stock }} Tons<small>In Stock</small></b><b class="price-tag {% if loop.index == 1 %}blue-tag{% elif loop.index == 2 %}green-tag{% else %}orange-tag{% endif %}">₹{{ '{:,}'.format(product.price) }}/ton</b></div>
+                </article>
+                {% else %}<p>No products are available yet.</p>{% endfor %}
+            </div>
+        </section>
+
+        <section class="quick-features" id="inventory">
+            <a href="{{ url_for('products_catalog') }}"><span class="feature-icon sky">▣</span><span><b>Real-time Inventory</b><small>{{ metrics.total_stock }} tons currently available</small></span></a>
+            <a href="{{ url_for('track_order') }}"><span class="feature-icon pink">♧</span><span><b>Order Tracking</b><small>Track your orders easily</small></span></a>
+            <a href="{{ url_for('complaints') }}"><span class="feature-icon rose">◉</span><span><b>Complaint Support</b><small>Raise &amp; track complaints</small></span></a>
+            <a href="#steelbot"><span class="feature-icon violet">✾</span><span><b>Smart Assistance</b><small>AI-Powered SteelBot</small></span></a>
+        </section>
+
+        <section class="live-inventory-section">
+            <div class="section-heading"><span></span><h2>Live Inventory Snapshot</h2><span></span></div>
+            <div class="inventory-snapshot"><div class="snapshot-copy"><p class="eyebrow">Updated from your inventory</p><h2>Plan with confidence</h2><p>Stock figures below come directly from the SteelConnect inventory database. Browse the catalogue for specifications and current pricing.</p><a class="primary-action" href="{{ url_for('products_catalog') }}">Browse all products</a></div><div class="snapshot-list">{% for product in inventory_snapshot %}<a href="{{ url_for('product_detail', product_id=product.id) }}"><img src="{{ product_image(product) }}" alt="{{ product.name }}"><span><b>{{ product.name }}</b><small>{{ product.category }}</small></span><strong>{{ product.stock }}<small> tons</small></strong></a>{% endfor %}</div></div>
+        </section>
+
+        <section class="service-strip"><article><span>▤</span><div><b>Reliable delivery</b><small>Order updates from processing to delivery</small></div></article><article><span>◈</span><div><b>Quality inventory</b><small>Material details and current availability</small></div></article><article><span>◉</span><div><b>Dedicated support</b><small>Raise a ticket whenever you need help</small></div></article></section>
+    </main>
+
+    <aside class="chatbot" id="steelbot" aria-label="SteelBot assistant">
+        <div class="chat-header"><span class="bot-avatar">🤖</span><span><b>SteelBot</b><small><i></i> Online</small></span><button type="button" aria-label="Minimize chat">−</button><button type="button" aria-label="Close chat">×</button></div>
+        <div class="chat-body" id="chatMessages"><div class="bot-message">🤖 &nbsp; Hello! 👋<br>&nbsp;&nbsp;&nbsp;&nbsp; How can I help you today?<time>Now</time></div></div>
+        <div class="quick-replies"><button onclick="askBot('products')">📦 Products</button><button onclick="askBot('inventory')">▣ Inventory</button><button onclick="askBot('price')">💰 Prices</button><button onclick="askBot('order')">♧ Order Tracking</button><button onclick="askBot('complaint')">◉ Complaints</button></div>
+        <div class="chat-input"><input id="userInput" type="text" placeholder="Type your message..." aria-label="Message SteelBot"><button type="button" onclick="sendMessage()">➤</button></div>
+    </aside>
+
+    <script>
+        function appendMessage(kind, text) {
+            const message = document.createElement('div');
+            message.className = kind + '-message';
+            message.textContent = text;
+            document.getElementById('chatMessages').appendChild(message);
+        }
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+            appendMessage('user', message);
+            input.value = '';
+            fetch('/chat', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: 'message=' + encodeURIComponent(message)})
+                .then(response => response.json()).then(data => appendMessage('bot', data.reply))
+                .catch(() => appendMessage('bot', 'Sorry, SteelBot is unavailable right now.'));
+        }
+        function askBot(message) { document.getElementById('userInput').value = message; sendMessage(); }
+        document.getElementById('userInput').addEventListener('keydown', event => { if (event.key === 'Enter') sendMessage(); });
+    </script>
+</body>
+</html>
