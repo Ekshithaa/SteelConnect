@@ -40,6 +40,17 @@ The command asks for the administrator details and password without storing them
 
 Set a strong `SECRET_KEY` environment variable, use a production WSGI server, and move from SQLite to a managed database as the project grows. The app refuses to start with `FLASK_ENV=production` unless `SECRET_KEY` is set. See `.env.example` for the required values.
 
+## Deploy on Render
+
+This repository includes `render.yaml` for Render. After pushing the current code to GitHub:
+
+1. Sign in to [Render](https://render.com) with GitHub.
+2. Choose **New** → **Blueprint** and select this repository.
+3. Confirm the generated `steelconnect` web service and deploy it.
+4. Open the generated `onrender.com` URL when the deploy is live.
+
+The free Render service is suitable for a demo. Its filesystem is temporary, so SQLite changes can be lost after a restart or redeploy. For persistent customer, order, and inventory data, use a managed PostgreSQL database or a paid Render persistent disk and set `DATABASE_PATH` to its mounted location.
+
 ## Database setup and upgrades
 
 Run `python3 database.py` to create or safely upgrade the database. The old `create_orders.py`, `create_products.py`, and `restore_products.py` commands now use the same safe setup process and no longer delete or insert conflicting data.

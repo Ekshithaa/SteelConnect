@@ -1,11 +1,14 @@
 """Database helpers and safe schema setup for SteelConnect."""
 
+import os
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
 
-DATABASE_PATH = Path(__file__).with_name("steelconnect.db")
+# A local file is convenient while developing. Hosting providers can set
+# DATABASE_PATH to a mounted persistent disk, for example /var/data/steelconnect.db.
+DATABASE_PATH = Path(os.environ.get("DATABASE_PATH", Path(__file__).with_name("steelconnect.db")))
 
 
 @contextmanager
