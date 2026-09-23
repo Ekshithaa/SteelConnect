@@ -1,5 +1,4 @@
-
-# 🏭 SteelConnect: Smart Inventory & Customer Assistance System
+# SteelConnect: Smart Inventory & Customer Assistance System
 
 🌐 **Live Website:** https://steelconnect.onrender.com
 
@@ -114,38 +113,6 @@ The project follows a web-based client-server architecture.
 
 ---
 
-## 📂 Project Structure
-
-```text
-SteelConnect/
-│
-├── app.py
-├── database.py
-├── requirements.txt
-├── README.md
-│
-├── templates/
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── products.html
-│   ├── admin.html
-│   ├── orders.html
-│   └── ...
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-└── instance/
-    └── database.db
-```
-
-*Note: Update the structure if your actual folder names differ.*
-
----
-
 ## ⚙️ Installation and Setup
 
 ### 1. Clone the Repository
@@ -234,20 +201,6 @@ https://steelconnect.onrender.com
 
 ---
 
-## 🧪 Testing
-
-The project includes testing support for application functionality.
-
-To run tests, use the appropriate test command configured in your project.
-
-Example:
-
-```bash
-python -m unittest discover
-```
-
----
-
 ## 🔮 Future Enhancements
 
 - Online payment integration.
@@ -275,14 +228,3 @@ Andhra University College of Engineering for Women, Visakhapatnam.
 This project is developed for educational and project demonstration purposes during my internship.
 
 ---
-
-## What works
-
-- Professional responsive homepage and SteelBot assistant
-- Account registration and secure password hashing
-- Login, logout, and protected administrator pages
-- Product add, edit, and delete tools for administrators
-- Inventory-aware ordering that prevents overselling and reduces stock
-- Public order tracking without exposing customer contact details
-- Order fulfillment workflow: Processing → Approved → Dispatched → Delivered
-- Personal order history and support-ticket workflow
