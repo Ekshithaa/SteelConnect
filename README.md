@@ -1,6 +1,280 @@
-# SteelConnect
 
-SteelConnect is a Flask web application for managing steel inventory, placing customer orders, tracking their status, and administering products and fulfillment.
+# 🏭 SteelConnect: Smart Inventory & Customer Assistance System
+
+🌐 **Live Website:** https://steelconnect.onrender.com
+
+📂 **GitHub Repository:** https://github.com/Ekshithaa/SteelConnect
+
+## 📌 Project Overview
+
+SteelConnect is a web-based Smart Inventory and Customer Assistance System developed to simplify steel product management, inventory tracking, customer ordering, and customer support.
+
+The application provides an efficient platform for administrators to manage products and orders while allowing customers to browse products, place orders, track deliveries, and interact with the SteelBot assistant.
+
+---
+
+## 🎯 Objectives
+
+- Digitize steel inventory management.
+- Simplify customer product ordering.
+- Prevent overselling through inventory-aware ordering.
+- Provide public order tracking.
+- Improve customer assistance using SteelBot.
+- Secure administrator operations through authentication.
+
+---
+
+## ✨ Key Features
+
+### 👤 User Features
+
+- User registration and login.
+- Secure password hashing.
+- Browse available steel products.
+- Inventory-aware product ordering.
+- Personal order history.
+- Track order status.
+- Submit support tickets.
+- SteelBot customer assistance.
+
+### 🛠️ Admin Features
+
+- Secure administrator login.
+- Protected admin dashboard.
+- Add new products.
+- Edit product details.
+- Delete products.
+- Manage inventory.
+- View and manage customer orders.
+- Update order fulfillment status.
+- Manage customer support tickets.
+
+### 📦 Order Management
+
+The order workflow includes:
+
+**Processing → Approved → Dispatched → Delivered**
+
+- Inventory validation before ordering.
+- Automatic stock reduction after successful order placement.
+- Public order tracking.
+- Order history for customers.
+
+### 🤖 SteelBot Assistant
+
+SteelBot provides customer assistance through an integrated chatbot interface, helping users navigate the website and access relevant product or service information.
+
+---
+
+## 🏗️ System Architecture
+
+The project follows a web-based client-server architecture.
+
+```text
+                    ┌───────────────────────┐
+                    │       Customer        │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │    Frontend Layer     │
+                    │ HTML | CSS | JavaScript│
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │    Flask Backend      │
+                    │       Python          │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │    SQLite Database    │
+                    │ Users | Products      │
+                    │ Orders | Inventory    │
+                    └───────────────────────┘
+```
+
+---
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Website structure |
+| CSS3 | Styling and responsive design |
+| JavaScript | Frontend interactivity |
+| Python | Backend programming |
+| Flask | Web application framework |
+| SQLite | Database management |
+| Werkzeug | Password hashing and security |
+| Gunicorn | Production WSGI server |
+| Git & GitHub | Version control |
+| Render | Cloud deployment |
+
+---
+
+## 📂 Project Structure
+
+```text
+SteelConnect/
+│
+├── app.py
+├── database.py
+├── requirements.txt
+├── README.md
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── products.html
+│   ├── admin.html
+│   ├── orders.html
+│   └── ...
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+└── instance/
+    └── database.db
+```
+
+*Note: Update the structure if your actual folder names differ.*
+
+---
+
+## ⚙️ Installation and Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Ekshithaa/SteelConnect.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd SteelConnect
+```
+
+### 3. Create a Virtual Environment
+
+```bash
+python3 -m venv venv
+```
+
+### 4. Activate the Virtual Environment
+
+**macOS / Linux:**
+
+```bash
+source venv/bin/activate
+```
+
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+### 5. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 6. Run the Application
+
+```bash
+python3 app.py
+```
+
+### 7. Open in Browser
+
+```text
+http://127.0.0.1:5000
+```
+
+*If your application uses another port, open the corresponding local URL.*
+
+---
+
+## 🔐 Security Features
+
+- Password hashing using Werkzeug.
+- Session-based authentication.
+- Protected administrator routes.
+- Authentication checks for admin operations.
+- Inventory validation during order placement.
+
+---
+
+## ☁️ Deployment
+
+SteelConnect is deployed using Render.
+
+### Deployment Configuration
+
+```text
+Build Command:
+pip install -r requirements.txt
+
+Start Command:
+gunicorn app:app
+```
+
+**Live Application:**
+
+https://steelconnect.onrender.com
+
+> ⚠️ Production Note: SQLite persistence and secret configuration should be reviewed before using the application for production data. Render's default filesystem is ephemeral.
+
+---
+
+## 🧪 Testing
+
+The project includes testing support for application functionality.
+
+To run tests, use the appropriate test command configured in your project.
+
+Example:
+
+```bash
+python -m unittest discover
+```
+
+---
+
+## 🔮 Future Enhancements
+
+- Online payment integration.
+- Email notifications for order updates.
+- Advanced inventory analytics.
+- Role-based access control.
+- Improved AI-powered customer assistance.
+- Persistent production database.
+- Enhanced reporting dashboard.
+
+---
+
+## 👩‍💻 Developer
+
+**Ekshithaa Valli Thelu**
+
+B.Tech Computer Science and Engineering
+
+Andhra University College of Engineering for Women, Visakhapatnam.
+
+---
+
+## 📜 License
+
+This project is developed for educational and project demonstration purposes during my internship.
+
+---
 
 ## What works
 
@@ -12,45 +286,3 @@ SteelConnect is a Flask web application for managing steel inventory, placing cu
 - Public order tracking without exposing customer contact details
 - Order fulfillment workflow: Processing → Approved → Dispatched → Delivered
 - Personal order history and support-ticket workflow
-
-## Run the project
-
-1. Open a terminal in this project folder.
-2. Create a virtual environment: `python3 -m venv .venv`
-3. Activate it: `source .venv/bin/activate`
-4. Install Flask: `pip install -r requirements.txt`
-5. Start the site: `python3 app.py`
-6. Open `http://127.0.0.1:5000` in your browser.
-
-The database is created and upgraded automatically when the app starts. If there are no products, starter steel products are added automatically.
-
-## Test the workflow
-
-Run `python3 -m unittest test_app.py` to check public pages, registration, login, stock reduction, and order tracking using a temporary test database.
-
-## Create the administrator account
-
-Customer registration never grants administrator access. Create the first administrator securely from the project folder:
-
-`python3 create_admin.py`
-
-The command asks for the administrator details and password without storing them in source code or terminal history.
-
-## Before deployment
-
-Set a strong `SECRET_KEY` environment variable, use a production WSGI server, and move from SQLite to a managed database as the project grows. The app refuses to start with `FLASK_ENV=production` unless `SECRET_KEY` is set. See `.env.example` for the required values.
-
-## Deploy on Render
-
-This repository includes `render.yaml` for Render. After pushing the current code to GitHub:
-
-1. Sign in to [Render](https://render.com) with GitHub.
-2. Choose **New** → **Blueprint** and select this repository.
-3. Confirm the generated `steelconnect` web service and deploy it.
-4. Open the generated `onrender.com` URL when the deploy is live.
-
-The free Render service is suitable for a demo. Its filesystem is temporary, so SQLite changes can be lost after a restart or redeploy. For persistent customer, order, and inventory data, use a managed PostgreSQL database or a paid Render persistent disk and set `DATABASE_PATH` to its mounted location.
-
-## Database setup and upgrades
-
-Run `python3 database.py` to create or safely upgrade the database. The old `create_orders.py`, `create_products.py`, and `restore_products.py` commands now use the same safe setup process and no longer delete or insert conflicting data.
